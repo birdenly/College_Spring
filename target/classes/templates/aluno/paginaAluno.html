@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aluno</title>
+    
+</head>
+<body>
+    
+  
+       <h1><p th:text="' Olá, ' + ${aluno.primeiroNome}"></h1>
+        <p th:text="'Seja bem-vindo, ' + ${aluno.primeiroNome} + ' ' + ${aluno.ultimoNome} "></p>
+        <p th:text="'Seu curso é:  ' + ${aluno.curso}"></p>
+        <p th:text="'Linguagem favorita:  ' + ${aluno.linguagem}"></p>
+        <p>Sistemas Operacionais favoritos: </p>
+        <ul>
+            <li th:each="os : ${aluno.sistemasOperacionas}">
+                <span th:text="${os}"/>
+            </li>
+        </ul>    
+
+        <br><br>
+        <a href="getListaAlunos">Ver lista de alunos</a><br>
+        <a href="showForm">Formulário de alunos</a><br>
+        
+        <p>Lista de alunos por curso, escolha o curso abaixo</p><br>
+        <form action="#" th:action="@{/aluno/getListaAlunosCurso}" th:object="${aluno}" method="post">
+            <select th:field="*{curso}">
+                <option th:each="curso: ${cursos}" th:value="${curso}" th:text="${curso}">
+            </select>
+            <p><input type="submit" value="Ver lista" /></p>
+        </form>
+
+        <p>Lista de alunos por linguagem, escolha o linguagem abaixo</p><br>
+        <form action="#" th:action="@{/aluno/getListaAlunosLinguagem}" th:object="${aluno}" method="post">
+            <select th:field="*{linguagem}">
+                <option th:each="linguagem: ${linguagem}" th:value="${linguagem}" th:text="${linguagem}">
+            </select>
+            <p><input type="submit" value="Ver lista" /></p>
+        </form>
+
+        <p>Lista de alunos por sistema, escolha o sistema abaixo</p><br>
+        <form action="#" th:action="@{/aluno/getListaAlunosSistema}" th:object="${aluno}" method="post">
+            <select th:field="*{sistemasOperacionas}">
+                <option th:each="sistemas: ${sistemasOperacionais}" th:value="${sistemas}" th:text="${sistemas}">
+            </select>
+              <p><input type="submit" value="Ver lista" /></p>
+        </form>
+
+        </body>
+</html>
